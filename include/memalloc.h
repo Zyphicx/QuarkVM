@@ -12,6 +12,8 @@
 struct q_memchunk;
 typedef struct q_memchunk MemChunk;
 
+extern int gc;
+
 
 void *Q_RawAlloc(size_t size);
 void Q_RawFree(void *p);
@@ -28,5 +30,6 @@ void Q_Free(void *p, size_t size);
 Q_Object *Q_ObjectAlloc(size_t size);
 void Q_ObjectFree(Q_Object *object);
 void runGC();
+void clearHeap();
 
 #endif

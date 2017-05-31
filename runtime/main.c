@@ -2,8 +2,7 @@
 #include <stdio.h>
 
 int main(int argc, char *argv[]){
-	Q_Integer *integer = Q_NewInteger();
-	integer->value = 5;
+	Q_Integer *integer = Q_NewInteger(5);
 
 	printf("%d\n", integer->value);
 
@@ -15,4 +14,9 @@ int main(int argc, char *argv[]){
 	runGC();
 
 	return 1;
+}
+
+int close(){
+	clearHeap();
+	clearStack();
 }

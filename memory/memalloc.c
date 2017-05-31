@@ -9,6 +9,7 @@ struct q_memchunk{
 /*GARBAGE COLLECTION*/
 
 static MemChunk *gclist = NULL;
+int gc = 0; //Set to 1 if garbage collector is running, otherwise 0
 
 /*RAW ALLOC FUNCTIONS*/
 
@@ -128,6 +129,8 @@ void Q_ObjectFree(Q_Object *object){
 }
 
 void runGC(){
+	gc = 1;
+
 	MemChunk *memory = gclist;
 
 	if(gclist == NULL)
@@ -146,5 +149,18 @@ void runGC(){
 		}else{
 			memory = memory->next;
 		}
+	}
+
+	gc = 0;
+}
+
+void clearHeap(){
+	MemChunk *memory = gclist;
+
+	while(memory != NULL){
+		Q_Object *object = (Q_Object *)(memory + 1);
+
+		MemChunk *memory = memory->next;
+		object->type->destructor((Q_Value *)object);
 	}
 }
