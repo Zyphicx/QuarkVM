@@ -4,13 +4,13 @@
 #include "memalloc.h"
 #include "objects.h"
 
-struct q_integer{
-	Q_PRIMITIVE_HEAD
-	int value;
-};
+struct q_integer;
 typedef struct q_integer Q_Integer;
 
-struct q_inttype;
+struct q_inttype{
+	Q_TYPE_HEAD
+};
+
 typedef struct q_inttype Q_IntType;
 extern Q_IntType Q_TypeInt;
 

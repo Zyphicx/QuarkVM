@@ -1,6 +1,7 @@
 #ifndef RUN_H
 #define RUN_H
 
+#include "memalloc.h"
 #include "objects.h"
 
 #define STACK_SIZE 4096

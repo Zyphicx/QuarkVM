@@ -18,7 +18,6 @@ void *Q_RawAlloc(size_t size){
 }
 
 void Q_RawFree(void *p){
-	printf("TRYING TO FREE DISS\n");
 	free(p);
 }
 
@@ -123,8 +122,6 @@ void Q_ObjectFree(Q_Object *object){
 		gclist = memory->next;
 	}
 
-	printf("%s: %d\n", object->type->name, sizeof(MemChunk) + object->type->size);
-
 	Q_Free(memory, (sizeof(MemChunk) + object->type->size));
 }
 
@@ -139,17 +136,17 @@ void runGC(){
 	while(memory != NULL){
 		Q_Object *object = (Q_Object *)(memory + 1);
 
-		printf("%s\n", object->type->name);
-
 		if(!object->refs){
-			MemChunk *temp = memory->next;
+			memory = memory->next;
 			object->type->destructor((Q_Value *)object);
-			memory = temp;
 			printf("Removed junk!\n");
 		}else{
 			memory = memory->next;
 		}
 	}
+
+	if(memory == NULL) //ADD REFERENCE COUNTING TO REFERENCE SET
+		gclist = NULL;
 
 	gc = 0;
 }
@@ -160,7 +157,8 @@ void clearHeap(){
 	while(memory != NULL){
 		Q_Object *object = (Q_Object *)(memory + 1);
 
-		MemChunk *memory = memory->next;
+		memory = memory->next;
 		object->type->destructor((Q_Value *)object);
+		printf("Removed junk!\n");
 	}
 }

@@ -3,21 +3,16 @@
 Q_Primitive **stack = NULL;
 
 size_t ip = 0; //Instruction pointer
-size_t sp; //Stack pointer
-size_t fp; //Frame pointer
+size_t sp = 0; //Stack pointer
+size_t fp = 0; //Frame pointer
 
 void setupStack(){
-	stack = Q_RawAlloc(STACK_SIZE * sizeof(Q_Value *));
-
- 	sp = 0;
- 	fp = 0;
+	stack = Q_RawAlloc(STACK_SIZE * sizeof(Q_Primitive *));
 }
 
 void clearStack(){
-	--sp; //sp is set to the next free stack element, this sets it to the next used element
-
 	while(sp--){
-		stack[sp]->type->destructor((Q_Value *)stack[p]):
+		stack[sp]->type->destructor((Q_Value *)stack[sp]);
 	}
 
 	Q_RawFree(stack);

@@ -6,5 +6,8 @@
 
 #include "integer.h"
 #include "list.h"
+#include "reference.h"
+
+#include "run.h"
 
 #endif

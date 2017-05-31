@@ -1,18 +1,17 @@
 #include "integer.h"
 
-struct q_inttype{
-	Q_TYPE_HEAD
-	int (*getValue)(Q_Integer *self);
-	void (*setValue)(Q_Integer *self, int value);
+#include <stdio.h>
+
+struct q_integer{
+	Q_PRIMITIVE_HEAD
+	int value;
 };
 
 Q_IntType Q_TypeInt =
 {
 	sizeof(Q_Integer),
 	"integer",
-	Q_DestroyInteger,
-	Q_IntegerGetValue,
-	Q_IntegerSetValue
+	Q_DestroyInteger
 };
 
 Q_Integer *Q_NewInteger(int value){
