@@ -19,7 +19,8 @@ Q_Reference *Q_NewReference(Q_Object *value){
 	r->type = (Q_Type *)&Q_TypeRef;
 	r->value = value;
 
-	++(value->refs);
+	if(value != NULL)
+		++(value->refs);
 
 	return r;
 }
