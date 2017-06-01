@@ -18,14 +18,9 @@ void clearStack(){
 	Q_RawFree(stack);
 }
 
-void push(Q_Primitive *value){
-	stack[sp++] = value;
-}
+/*STACK OPERATIONS*/
 
-Q_Primitive *pop(){
-	return (sp > 0) ? stack[--sp] : NULL;
-}
-
-Q_Primitive *peek(){
-	return stack[sp-1];
-}
+#define SETVAL(n, v) (stack[n] = v)
+#define PUSH(v) (stack[sp++] = v)
+#define POP() (stack[--sp])
+#define PEEK() (stack[sp-1])
