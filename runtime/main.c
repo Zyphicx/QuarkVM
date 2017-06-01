@@ -6,7 +6,7 @@
 void q_close();
 
 int main(int argc, char *argv[]){
-	setupStack();
+	/*setupStack();
 
 	Q_Integer *integer = Q_NewInteger(5);
 
@@ -30,7 +30,9 @@ int main(int argc, char *argv[]){
 
 	printf("Teehee!\n");
 
-	Q_DestroyReference((Q_Value *)ref);
+	Q_DestroyReference((Q_Value *)ref);*/
+
+	Q_Run();
 
 	q_close();
 

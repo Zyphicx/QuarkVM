@@ -3,6 +3,10 @@
 
 #include "memalloc.h"
 #include "objects.h"
+#include "opcode.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
 
 #define STACK_SIZE 4096
 
@@ -12,5 +16,6 @@ extern size_t fp;
 
 void setupStack();
 void clearStack();
+void Q_Run();
 
 #endif
