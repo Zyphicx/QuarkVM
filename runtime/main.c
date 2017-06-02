@@ -32,6 +32,8 @@ int main(int argc, char *argv[]){
 
 	Q_DestroyReference((Q_Value *)ref);*/
 
+	printf("%d\n", isUpcastable(&Q_TypeFloat, &Q_TypeInt));
+
 	Q_Run();
 
 	q_close();

@@ -2,21 +2,19 @@
 
 #include <stdio.h>
 
-struct q_reference{
-	Q_PRIMITIVE_HEAD
-	Q_Object *value;
-};
-
-Q_RefType Q_TypeRef =
+Q_Type Q_TypeRef =
 {
 	sizeof(Q_Reference),
 	"reference",
-	Q_DestroyReference
+	Q_DestroyReference,
+	{
+		NULL
+	}
 };
 
 Q_Reference *Q_NewReference(Q_Object *value){
 	Q_Reference *r = Q_RawAlloc(sizeof(Q_Reference));
-	r->type = (Q_Type *)&Q_TypeRef;
+	r->type = &Q_TypeRef;
 	r->value = value;
 
 	if(value != NULL)
@@ -26,11 +24,8 @@ Q_Reference *Q_NewReference(Q_Object *value){
 }
 
 void Q_DestroyReference(Q_Value *self){
+	--((Q_Reference *)self)->value->refs;
 	Q_RawFree(self);
-}
-
-Q_Object *Q_ReferenceGetValue(Q_Reference *self){
-	return self->value;
 }
 
 void Q_ReferenceSetValue(Q_Reference *self, Q_Object *value){

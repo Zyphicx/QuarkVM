@@ -7,6 +7,7 @@
 	size_t size; \
 	char *name; \
 	dstruct destructor; \
+	Q_Type *upcastable[];
 
 
 #define Q_VALUE_HEAD \
@@ -55,5 +56,7 @@ struct q_primitive{
 struct q_object{
 	Q_OBJECT_HEAD
 };
+
+int isUpcastable(Q_Type *type1, Q_Type *type2);
 
 #endif

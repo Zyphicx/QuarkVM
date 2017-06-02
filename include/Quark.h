@@ -4,6 +4,7 @@
 #include "memalloc.h"
 #include "objects.h"
 
+#include "float.h"
 #include "integer.h"
 #include "list.h"
 #include "reference.h"

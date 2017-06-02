@@ -10,7 +10,7 @@ struct q_list{
 	size_t current; //The amount of currently used elements
 };
 
-Q_ListType Q_TypeList =
+Q_Type Q_TypeList =
 {
 	sizeof(Q_List),
 	"list",
@@ -50,7 +50,7 @@ void Q_DestroyList(Q_Value *self){
 	Q_ObjectFree((Q_Object *)self);
 }
 
-Q_Value *Q_ListGet(Q_List *self, size_t index){
+Q_Value *Q_ListGet(Q_List *self, size_t index){ //Change this to a macro?
 	return self->list[index];
 }
 

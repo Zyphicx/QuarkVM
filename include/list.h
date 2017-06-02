@@ -10,8 +10,7 @@ typedef struct q_list Q_List;
 struct q_listtype{
 	Q_TYPE_HEAD
 };
-typedef struct q_listtype Q_ListType;
-extern Q_ListType Q_TypeList;
+extern Q_Type Q_TypeList;
 
 Q_List *Q_NewList(size_t elemNum, Q_Type *elemType);
 void Q_DestroyList(Q_Value *self);
