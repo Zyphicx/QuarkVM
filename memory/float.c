@@ -38,9 +38,9 @@ void Q_DestroyFloat(Q_Value *self){
 
 float Q_ToFloat(Q_Value *val){
 	if(val->type == &Q_TypeInt){
-		return Q_IntToFloat((Q_Integer *)val);
+		return Q_IntToFloat(val);
 	}else{
-		fprintf(stderr, "Can't cast type \"%s\" to float.", nuvalm->type->name);
+		fprintf(stderr, "Can't cast type \"%s\" to float.", val->type->name);
 	}
 }
 

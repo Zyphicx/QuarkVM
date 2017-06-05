@@ -37,12 +37,12 @@ void Q_DestroyInteger(Q_Value *self){
 	Q_RawFree(self);
 }
 
-float Q_IntToFloat(Q_Integer *self){
-	return (float)((Q_Integer *)self->value);
+float Q_IntToFloat(Q_Value *self){
+	return (float)((Q_Integer *)self)->value;
 }
 
-double Q_IntToDouble(Q_Integer *self){
-	return (double)((Q_Integer *)self->value);
+double Q_IntToDouble(Q_Value *self){
+	return (double)(((Q_Integer *)self)->value);
 }
 
 int Q_ToInt(Q_Value *val){

@@ -1,6 +1,8 @@
 #ifndef ARITHMETIC_H
 #define ARITHMETIC_H
 
-Q_Primitive *Q_Add(Q_Primitive *num1, Q_Primitive *num2);
+#include "objects.h"
+
+Q_Value *Q_Add(Q_Value *num1, Q_Value *num2);
 
 #endif

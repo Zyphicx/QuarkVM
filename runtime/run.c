@@ -31,7 +31,7 @@ void clearStack(){
 uint8_t fetch();
 void execute();
 
-uint8_t instructions[] = {0x02, 0x03, 0x11, 0x02, 0x04, 0x05, 0x06};
+uint8_t instructions[] = {0x02, 0x03, 0x11, 0x03, 0x04, 0x05, 0x06};
 
 void Q_Run(){
 	setupStack();
@@ -57,11 +57,11 @@ void execute(){
 			break;
 
 		case ICONST:
-			PUSH(Q_NewInteger((instructions[ip++] << 8) | instructions[ip++]));
+			PUSH((Q_Value *)Q_NewInteger((instructions[ip++] << 8) | instructions[ip++]));
 			break;
 
 		case FCONST:
-			PUSH(Q_NewFloat(3.1415)); //Change this later to actually read in a value
+			PUSH((Q_Value *)Q_NewFloat(3.5)); //Change this later to actually read in a value
 			break;
 
 		case ADD:
@@ -71,8 +71,8 @@ void execute(){
 
 			PUSH(Q_Add(num1, num2));
 
-			i1->type->destructor((Q_Value *)i1);
-			i2->type->destructor((Q_Value *)i2);
+			num1->type->destructor((Q_Value *)num1);
+			num2->type->destructor((Q_Value *)num2);
 			break;
 		}
 
@@ -80,7 +80,7 @@ void execute(){
 		{
 			Q_Float *i = (Q_Float *)POP();
 
-			printf("%d\n", i->value);
+			printf("%f\n", i->value);
 
 			i->type->destructor((Q_Value *)i);
 			break;

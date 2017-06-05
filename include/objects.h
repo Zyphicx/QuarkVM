@@ -3,34 +3,6 @@
 
 #include <stdlib.h>
 
-#define Q_TYPE_HEAD \
-	size_t size; \
-	char *name; \
-	dstruct destructor; \
-	cstruct new; \
-
-	/*ARITHMETIC FUNCTIONS*/
-	Q_Value *(*add)(Q_Value *, Q_Value *); \
-	Q_Value *(*sub)(Q_Value *, Q_Value *); \
-	Q_Value *(*mul)(Q_Value *, Q_Value *); \
-	Q_Value *(*div)(Q_Value *, Q_Value *); \
-	Q_Value *(*exp)(Q_Value *, Q_Value *); \
-	Q_Value *(*mod)(Q_Value *, Q_Value *); \
-
-
-	Q_Type *upcastable[];
-
-
-#define Q_VALUE_HEAD \
-	Q_Type *type;
-
-#define Q_PRIMITIVE_HEAD \
-	Q_VALUE_HEAD
-
-#define Q_OBJECT_HEAD \
-	Q_VALUE_HEAD \
-	size_t refs;
-
 struct q_type;
 typedef struct q_type Q_Type;
 
@@ -46,13 +18,38 @@ typedef struct q_primitive Q_Primitive;
 struct q_object;
 typedef struct q_object Q_Object;
 
+#define Q_TYPE_HEAD \
+
+
+
+#define Q_VALUE_HEAD \
+	Q_Type *type;
+
+#define Q_PRIMITIVE_HEAD \
+	Q_VALUE_HEAD
+
+#define Q_OBJECT_HEAD \
+	Q_VALUE_HEAD \
+	size_t refs;
+
 
 typedef void (*dstruct)(Q_Value *);
-typedef void (*cstruct)(Q_Value *);
 
 
 struct q_type{
-	Q_TYPE_HEAD
+	size_t size;
+	char *name;
+	dstruct destructor;
+	
+	/*ARITHMETIC FUNCTIONS*/
+	Q_Value *(*add)(Q_Value *, Q_Value *); //Change to qadd
+	Q_Value *(*qsub)(Q_Value *, Q_Value *);
+	Q_Value *(*qmul)(Q_Value *, Q_Value *);
+	Q_Value *(*qdiv)(Q_Value *, Q_Value *);
+	Q_Value *(*qexp)(Q_Value *, Q_Value *);
+	Q_Value *(*qmod)(Q_Value *, Q_Value *);
+
+	Q_Type *upcastable[];
 };
 
 struct q_value{
