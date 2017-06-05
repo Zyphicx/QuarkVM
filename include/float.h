@@ -18,5 +18,9 @@ extern Q_Type Q_TypeFloat;
 
 Q_Float *Q_NewFloat(float value);
 void Q_DestroyFloat(Q_Value *self);
+float Q_ToFloat(Q_Primitive *num);
+double Q_FloatToDouble(Q_Primitive *num);
+
+Q_Value *Q_AddFloat(Q_Value *val1, Q_Value *val2);
 
 #endif

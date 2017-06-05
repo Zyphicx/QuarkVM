@@ -4,8 +4,9 @@
 #define PUSHVAL 0
 #define POPVAL 1
 #define ICONST 2
-#define ADD 3
-#define PRINT 4
-#define HALT 5
+#define FCONST 3
+#define ADD 4
+#define PRINT 5
+#define HALT 6
 
 #endif

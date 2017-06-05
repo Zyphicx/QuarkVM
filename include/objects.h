@@ -7,6 +7,17 @@
 	size_t size; \
 	char *name; \
 	dstruct destructor; \
+	cstruct new; \
+
+	/*ARITHMETIC FUNCTIONS*/
+	Q_Value *(*add)(Q_Value *, Q_Value *); \
+	Q_Value *(*sub)(Q_Value *, Q_Value *); \
+	Q_Value *(*mul)(Q_Value *, Q_Value *); \
+	Q_Value *(*div)(Q_Value *, Q_Value *); \
+	Q_Value *(*exp)(Q_Value *, Q_Value *); \
+	Q_Value *(*mod)(Q_Value *, Q_Value *); \
+
+
 	Q_Type *upcastable[];
 
 
@@ -37,6 +48,7 @@ typedef struct q_object Q_Object;
 
 
 typedef void (*dstruct)(Q_Value *);
+typedef void (*cstruct)(Q_Value *);
 
 
 struct q_type{
@@ -58,5 +70,6 @@ struct q_object{
 };
 
 int isUpcastable(Q_Type *type1, Q_Type *type2);
+int Q_CastType(Q_Type *type1, Q_Type *type2);
 
 #endif

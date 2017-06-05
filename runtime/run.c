@@ -7,7 +7,7 @@
 #define POP() (stack[--sp])
 #define PEEK() (stack[sp-1])
 
-Q_Primitive **stack = NULL;
+Q_Value **stack = NULL;
 
 size_t ip = 0; //Instruction pointer
 size_t sp = 0; //Stack pointer
@@ -17,12 +17,12 @@ uint8_t opcode;
 int halt = 0; //Set to 1 when program is halted
 
 void setupStack(){
-	stack = Q_RawAlloc(STACK_SIZE * sizeof(Q_Primitive *));
+	stack = Q_RawAlloc(STACK_SIZE * sizeof(Q_Value *));
 }
 
 void clearStack(){
 	while(sp--){
-		stack[sp]->type->destructor((Q_Value *)stack[sp]);
+		stack[sp]->type->destructor(stack[sp]);
 	}
 
 	Q_RawFree(stack);
@@ -31,7 +31,7 @@ void clearStack(){
 uint8_t fetch();
 void execute();
 
-uint8_t instructions[] = {0x02, 0x03, 0x11, 0x02, 0x00, 0x0e, 0x03, 0x04, 0x05};
+uint8_t instructions[] = {0x02, 0x03, 0x11, 0x02, 0x04, 0x05, 0x06};
 
 void Q_Run(){
 	setupStack();
@@ -57,15 +57,19 @@ void execute(){
 			break;
 
 		case ICONST:
-			PUSH((Q_Primitive *)Q_NewInteger((instructions[ip++] << 8) | instructions[ip++]));
+			PUSH(Q_NewInteger((instructions[ip++] << 8) | instructions[ip++]));
+			break;
+
+		case FCONST:
+			PUSH(Q_NewFloat(3.1415)); //Change this later to actually read in a value
 			break;
 
 		case ADD:
 		{
-			Q_Integer *i1 = (Q_Integer *)POP();
-			Q_Integer *i2 = (Q_Integer *)POP();
+			Q_Value *num1 = POP();
+			Q_Value *num2 = POP();
 
-			PUSH((Q_Primitive *)Q_NewInteger(i1->value + i2->value));
+			PUSH(Q_Add(num1, num2));
 
 			i1->type->destructor((Q_Value *)i1);
 			i2->type->destructor((Q_Value *)i2);
@@ -74,7 +78,7 @@ void execute(){
 
 		case PRINT:
 		{
-			Q_Integer *i = (Q_Integer *)POP();
+			Q_Float *i = (Q_Float *)POP();
 
 			printf("%d\n", i->value);
 

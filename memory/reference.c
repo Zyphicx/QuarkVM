@@ -7,9 +7,17 @@ Q_Type Q_TypeRef =
 	sizeof(Q_Reference),
 	"reference",
 	Q_DestroyReference,
-	{
-		NULL
-	}
+
+	/*ARITHMETIC FUNCTIONS*/
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+
+	/*Subtypes*/
+	{NULL}
 };
 
 Q_Reference *Q_NewReference(Q_Object *value){

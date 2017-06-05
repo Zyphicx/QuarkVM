@@ -8,3 +8,4 @@ int isUpcastable(Q_Type *type1, Q_Type *type2){
 
 	return t != NULL; //If end of array is reached without an element being found, return 0
 }
+

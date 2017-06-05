@@ -14,7 +14,18 @@ Q_Type Q_TypeList =
 {
 	sizeof(Q_List),
 	"list",
-	Q_DestroyList
+	Q_DestroyList,
+
+	/*ARITHMETIC FUNCTIONS*/
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+
+	/*Subtypes*/
+	{NULL}
 };
 
 Q_List *Q_NewList(size_t elemNum, Q_Type *elemType){
